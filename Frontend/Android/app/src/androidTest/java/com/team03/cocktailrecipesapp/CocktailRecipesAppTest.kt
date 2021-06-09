@@ -1,7 +1,10 @@
 package com.team03.cocktailrecipesapp
 
 import android.content.Context
+import android.view.View
+import android.widget.RatingBar
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -226,7 +229,7 @@ class CocktailRecipesAppTest {
     fun AddNewRecipe() {
         login()
         // Get recipe for testing
-        if (test_recipes_index > 3) { test_recipes_index = 0 }
+        if (test_recipes_index > test_recipes.size) { test_recipes_index = 0 }
         val recipe: TestRecipe = test_recipes.get(test_recipes_index)
 
         onView(withId(R.id.add_recipe_button)).perform(click())
@@ -281,6 +284,30 @@ class CocktailRecipesAppTest {
         onView(allOf(
             withId(R.id.trendingCocktailCard), withParentIndex(0))).perform(click())
         Thread.sleep(3000)
+        onView(withId(R.id.delete_recipe_button)).perform(click())
+        Thread.sleep(1000)
+        onView(withText("YES")).perform(click())
+    }
+
+    @Test
+    fun RateAndDeleteRecipe()  {
+        test_recipes_index = 4
+        AddNewRecipe()
+        Thread.sleep(1000)
+        onView(withId(R.id.txtViewSeeAll)).perform(click())
+        Thread.sleep(2000)
+        onView(withId(R.id.searchRecipesCardView)).perform(click())
+        onView(withId(R.id.searchRecipesView)).perform(typeText(test_recipes[4].name), closeSoftKeyboard())
+        Thread.sleep(1000)
+        onView(allOf(
+            withId(R.id.trendingCocktailCard), withParentIndex(0))).perform(click())
+        Thread.sleep(3000)
+        onView(withId(R.id.imgBtnRate)).perform(click())
+        Thread.sleep(1000)
+        onView(withId(R.id.selectRatingBar)).perform(click())
+        Thread.sleep(1000)
+        onView(withId(R.id.sendRatingBtn)).perform(click())
+        Thread.sleep(1000)
         onView(withId(R.id.delete_recipe_button)).perform(click())
         Thread.sleep(1000)
         onView(withText("YES")).perform(click())

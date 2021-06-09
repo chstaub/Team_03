@@ -102,7 +102,12 @@ val test_recipe_4: TestRecipe =
         TestIngredient("Tequila", 100, "ml"),
         TestIngredient("Rum", 30, "ml"),
         TestIngredient("Ice", 3, "pcs")))
-val test_recipes: List<TestRecipe> = listOf(test_recipe_1, test_recipe_2, test_recipe_3, test_recipe_4)
+val test_recipe_5: TestRecipe =
+    TestRecipe("Test recipe rate", "Test description rate", listOf(
+        TestIngredient("Tequila", 100, "ml"),
+        TestIngredient("Rum", 30, "ml"),
+        TestIngredient("Ice", 3, "pcs")))
+val test_recipes: List<TestRecipe> = listOf(test_recipe_1, test_recipe_2, test_recipe_3, test_recipe_4, test_recipe_5)
 var test_recipes_index: Int = 0
 
 
